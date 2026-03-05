@@ -21,10 +21,18 @@ Sacerdote  →  Crítico  →  Meta-crítico  →  Juez (JSON final)
 
 ## Conceptos aplicados
 
-- `SystemMessage`, `HumanMessage`, `AIMessage`, `ToolMessage`
-- `FewShotPromptTemplate` con chain-of-thought
-- `with_structured_output` + schemas Pydantic
-- `@tool` + `bind_tools` + ReAct loop manual
+- `SystemMessage`, `HumanMessage`, `AIMessage`, `ToolMessage` — historial de conversación multi-turno
+- `PromptTemplate` — plantillas de prompts parametrizadas
+- `FewShotPromptTemplate` + `FewShotChatMessagePromptTemplate` — few-shot con chain-of-thought (Thought/Response)
+- `StrOutputParser`, `PydanticOutputParser`, `DatetimeOutputParser`, `BooleanOutputParser`, `OutputFixingParser` — parseo y autocorrección de salidas
+- `with_structured_output` + schemas Pydantic (`BaseModel`, `Field`) — JSON tipado y validado
+- `@tool` + `bind_tools` — definición y conexión de herramientas al LLM
+- ReAct loop manual — ciclo `llm_con_tools → ejecutar tool_calls → reinvocar` hasta respuesta final
+- `StateGraph` (LangGraph) — grafo con nodos, edges condicionales y visualización Mermaid
+- `create_react_agent` — agente ReAct prebuilt de LangGraph
+- `InMemorySaver` — checkpointing para memoria persistente entre turnos
+- Patrón Supervisor (multi-agente) — agente central que delega a sub-agentes especializados como tools
+- Protocolo A2A (Agent2Agent) — Agent Cards, descubrimiento de agentes y comunicación entre frameworks
 
 ## Instalación
 
